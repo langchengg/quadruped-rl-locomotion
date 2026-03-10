@@ -1,0 +1,89 @@
+# ──────────────────────────────────────────────────
+# Reward Ablation Experiment Configurations
+# 
+# Run all experiments:
+#   bash scripts/run_ablation.sh
+#
+# Each experiment removes one reward component to measure
+# its impact on locomotion quality.
+# ──────────────────────────────────────────────────
+
+# Experiment naming convention:
+#   ablation_no_{reward_name} = train without that reward component
+
+# Baseline: All rewards active (use configs/default.yaml)
+
+experiments:
+  # Remove linear velocity tracking
+  ablation_no_tracking_lin_vel:
+    reward_scales:
+      tracking_lin_vel: 0.0    # DISABLED
+      tracking_ang_vel: 0.2
+      lin_vel_z: -1.0
+      base_height: -50.0
+      action_rate: -0.005
+      similar_to_default: -0.1
+
+  # Remove angular velocity tracking
+  ablation_no_tracking_ang_vel:
+    reward_scales:
+      tracking_lin_vel: 1.0
+      tracking_ang_vel: 0.0    # DISABLED
+      lin_vel_z: -1.0
+      base_height: -50.0
+      action_rate: -0.005
+      similar_to_default: -0.1
+
+  # Remove vertical velocity penalty
+  ablation_no_lin_vel_z:
+    reward_scales:
+      tracking_lin_vel: 1.0
+      tracking_ang_vel: 0.2
+      lin_vel_z: 0.0           # DISABLED
+      base_height: -50.0
+      action_rate: -0.005
+      similar_to_default: -0.1
+
+  # Remove base height penalty
+  ablation_no_base_height:
+    reward_scales:
+      tracking_lin_vel: 1.0
+      tracking_ang_vel: 0.2
+      lin_vel_z: -1.0
+      base_height: 0.0        # DISABLED
+      action_rate: -0.005
+      similar_to_default: -0.1
+
+  # Remove action rate penalty
+  ablation_no_action_rate:
+    reward_scales:
+      tracking_lin_vel: 1.0
+      tracking_ang_vel: 0.2
+      lin_vel_z: -1.0
+      base_height: -50.0
+      action_rate: 0.0         # DISABLED
+      similar_to_default: -0.1
+
+  # Remove pose similarity penalty
+  ablation_no_similar_to_default:
+    reward_scales:
+      tracking_lin_vel: 1.0
+      tracking_ang_vel: 0.2
+      lin_vel_z: -1.0
+      base_height: -50.0
+      action_rate: -0.005
+      similar_to_default: 0.0  # DISABLED
+
+  # Extended: Add additional rewards
+  extended_all_rewards:
+    reward_scales:
+      tracking_lin_vel: 1.0
+      tracking_ang_vel: 0.2
+      lin_vel_z: -1.0
+      ang_vel_xy: -0.05
+      orientation: -1.0
+      base_height: -50.0
+      action_rate: -0.005
+      torque: -0.0001
+      similar_to_default: -0.1
+      feet_air_time: 0.5

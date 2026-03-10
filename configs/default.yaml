@@ -1,0 +1,63 @@
+# ──────────────────────────────────────────────────
+# Default Training Configuration
+# Unitree Go2 Quadruped Locomotion with PPO
+# ──────────────────────────────────────────────────
+
+env:
+  num_actions: 12
+  default_joint_angles:
+    FL_hip_joint: 0.0
+    FR_hip_joint: 0.0
+    RL_hip_joint: 0.0
+    RR_hip_joint: 0.0
+    FL_thigh_joint: 0.9
+    FR_thigh_joint: 0.9
+    RL_thigh_joint: 0.9
+    RR_thigh_joint: 0.9
+    FL_calf_joint: -1.8
+    FR_calf_joint: -1.8
+    RL_calf_joint: -1.8
+    RR_calf_joint: -1.8
+  dof_names:
+    - FR_hip_joint
+    - FR_thigh_joint
+    - FR_calf_joint
+    - FL_hip_joint
+    - FL_thigh_joint
+    - FL_calf_joint
+    - RR_hip_joint
+    - RR_thigh_joint
+    - RR_calf_joint
+    - RL_hip_joint
+    - RL_thigh_joint
+    - RL_calf_joint
+  kp: 20.0
+  kd: 0.5
+  action_scale: 0.25
+  clip_actions: 100.0
+  episode_length_s: 20.0
+  resampling_time_s: 4.0
+  termination_if_roll_greater_than: 30.0
+  termination_if_pitch_greater_than: 30.0
+  base_init_pos: [0.0, 0.0, 0.27]
+  base_init_quat: [1.0, 0.0, 0.0, 0.0]
+  simulate_action_latency: true
+
+reward:
+  tracking_sigma: 0.25
+  base_height_target: 0.27
+  dt: 0.02
+  reward_scales:
+    tracking_lin_vel: 1.0
+    tracking_ang_vel: 0.2
+    lin_vel_z: -1.0
+    base_height: -50.0
+    action_rate: -0.005
+    similar_to_default: -0.1
+
+command:
+  num_commands: 5
+  lin_vel_x_range: [-0.5, 1.5]
+  lin_vel_y_range: [-0.3, 0.3]
+  ang_vel_range: [-0.5, 0.5]
+  height_range: [0.2, 0.35]

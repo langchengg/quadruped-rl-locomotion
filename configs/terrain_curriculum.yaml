@@ -1,0 +1,64 @@
+# ──────────────────────────────────────────────────
+# Terrain Curriculum Configuration
+# 
+# Controls terrain difficulty progression during training.
+# The terrain difficulty increases as training progresses,
+# following the schedule defined below.
+# ──────────────────────────────────────────────────
+
+terrain:
+  enabled: true
+  
+  # Heightfield parameters
+  nrow: 200
+  ncol: 200
+  size: [10.0, 10.0, 0.5, 0.0]  # [x, y, max_height, offset]
+  resolution: 0.05
+  
+  # Curriculum schedule
+  # Maps training progress (0-1) to terrain difficulty (0-1)
+  curriculum:
+    # Start with flat terrain
+    - progress: 0.0
+      difficulty: 0.0
+    
+    # Introduce gentle slopes at 20% training
+    - progress: 0.2
+      difficulty: 0.3
+    
+    # Add stairs at 40% training
+    - progress: 0.4
+      difficulty: 0.6
+    
+    # Random rough terrain at 70% training
+    - progress: 0.7
+      difficulty: 0.8
+    
+    # Full difficulty at 90% training
+    - progress: 0.9
+      difficulty: 1.0
+  
+  # Terrain type probabilities at max difficulty
+  type_weights:
+    flat: 0.1
+    slope: 0.25
+    stairs: 0.25
+    rough: 0.3
+    mixed: 0.1
+  
+  # Slope parameters
+  slope:
+    min_angle: 3.0    # degrees
+    max_angle: 15.0   # degrees
+  
+  # Stairs parameters
+  stairs:
+    min_height: 0.02  # meters
+    max_height: 0.10
+    step_width: 0.3
+  
+  # Rough terrain parameters
+  rough:
+    min_amplitude: 0.01
+    max_amplitude: 0.05
+    frequency: 1.0

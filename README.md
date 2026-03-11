@@ -8,8 +8,9 @@
 [![MuJoCo 3.0+](https://img.shields.io/badge/MuJoCo-3.0+-green.svg)](https://mujoco.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-<!-- TODO: Replace with your trained robot GIF -->
-<!-- ![Go2 Walking](results/videos/go2_walking.gif) -->
+<!-- Replace with your trained robot GIFs extracted from quadruped_results.zip -->
+![Go2 Fast Walk](results/videos/fast_walk.gif)
+![Go2 Turning](results/videos/turning.gif)
 
 </div>
 
@@ -119,6 +120,18 @@ python src/evaluate.py --policy random --num_steps 200 --save_gif
 ### 4. Run on Kaggle/Colab
 
 Open `notebooks/train_quadruped.ipynb` and run all cells. The notebook is self-contained with installation, training, and visualization.
+
+#### Loading Kaggle Results Locally
+
+After completing the Kaggle notebook and downloading the `quadruped_model.zip` and `quadruped_results.zip` files:
+
+1. Extract `quadruped_model.zip` into `logs/kaggle_ppo/`.
+2. Extract `quadruped_results.zip` into `results/`.
+3. You can now use `evaluate.py` directly with the Kaggle-trained model:
+```bash
+python src/evaluate.py --model logs/kaggle_ppo/best_model
+```
+4. View the generated GIF videos in `results/videos/` and the reward curve in `results/training_curves/ppo_training.png`.
 
 ---
 
